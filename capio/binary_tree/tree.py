@@ -14,7 +14,7 @@ class Node:
 
 
     def __str__(self):
-
+        self.pretty_print()
 
 
     def bfs(self):
@@ -118,4 +118,4 @@ root.right.right = Node(7)
 root = create_tree([1,2,3,None, 4,5])
 #print(root)
 #root.bfs()
-root.display()
+root.pretty_print()
