@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="ohmyds",
-    version="0.0.1",
+    version="0.0.2",
     author="Prabhu Pant",
     author_email="prabhupant09@gmail.com",
     description="Python library to visualize data strcutures",
