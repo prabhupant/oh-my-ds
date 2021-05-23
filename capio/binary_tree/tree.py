@@ -1,10 +1,3 @@
-# add node
-# delete node
-# bfs
-# dfs - lnr, nlr, lrn
-# tree from array
-
-
 class Node:
 
     def __init__(self, val):
@@ -14,32 +7,61 @@ class Node:
 
 
     def __str__(self):
-        self.pretty_print()
+        tree_str_list =  self.pretty_print()
+        tree_str = '\n'.join(tree_str_list)
+        return tree_str
 
 
-    def bfs(self):
+    def level_order(self):
         root = self
         queue = []
         queue.append(root)
+        bfs = []
 
         while queue:
-            s = queue.pop(0)
-            print(s.val, end=' ')
+            level_queue = []
+            count = len(queue)
 
-            if s.left:
-                queue.append(s.left)
-            if s.right:
-                queue.append(s.right)
+            while count: 
+                s = queue.pop(0)
+                level_queue.append(s.val)
+
+                if s.left:
+                    queue.append(s.left)
+                if s.right:
+                    queue.append(s.right)
+
+                count -= 1
+
+            bfs.append(level_queue)
+
+        return bfs
+
+
+    def inorder(self):
+        pass
+
+
+    def postorder(self):
+        pass
+
+
+    def preorder(self):
+        pass
 
 
     def pretty_print(self):
-        lines, *_ = self._display_aux()
+        lines, *_ = self.pretty_print_util()
+        tree_str = []
+        
         for line in lines:
-            print(line)
+            tree_str.append(line)
 
 
-    def _display_aux(self):
-        """Returns list of strings, width, height, and horizontal coordinate of the root."""
+        return tree_str
+
+
+    def pretty_print_util(self):
         # No child.
         if self.right is None and self.left is None:
             line = '%s' % self.val
@@ -50,7 +72,7 @@ class Node:
 
         # Only left child.
         if self.right is None:
-            lines, n, p, x = self.left._display_aux()
+            lines, n, p, x = self.left.pretty_print_util()
             s = '%s' % self.val
             u = len(s)
             first_line = (x + 1) * ' ' + (n - x - 1) * '_' + s
@@ -60,7 +82,7 @@ class Node:
 
         # Only right child.
         if self.left is None:
-            lines, n, p, x = self.right._display_aux()
+            lines, n, p, x = self.right.pretty_print_util()
             s = '%s' % self.val
             u = len(s)
             first_line = s + x * '_' + (n - x) * ' '
@@ -69,8 +91,8 @@ class Node:
             return [first_line, second_line] + shifted_lines, n + u, p + 2, u // 2
 
         # Two children.
-        left, n, p, x = self.left._display_aux()
-        right, m, q, y = self.right._display_aux()
+        left, n, p, x = self.left.pretty_print_util()
+        right, m, q, y = self.right.pretty_print_util()
         s = '%s' % self.val
         u = len(s)
         first_line = (x + 1) * ' ' + (n - x - 1) * '_' + s + y * '_' + (m - y) * ' '
@@ -94,28 +116,10 @@ def create_tree(vals):
             parent_index = (i - 1) // 2
             parent = nodes[parent_index]
             
-            if i % 2 == 0:
-                parent.left = node
-            else:
-                parent.right = node
+            if parent:
+                if i % 2 == 0:
+                    parent.left = node
+                else:
+                    parent.right = node
 
     return nodes[0]
-
-
-
-
-
-root = Node(1)
-root.left = Node(2)
-root.right = Node(3)
-
-root.left.left = Node(4)
-root.left.right = Node(5)
-
-root.right.left = Node(6)
-root.right.right = Node(7)
-
-root = create_tree([1,2,3,None, 4,5])
-#print(root)
-#root.bfs()
-root.pretty_print()
