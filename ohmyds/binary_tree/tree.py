@@ -39,15 +39,24 @@ class Node:
 
 
     def inorder(self):
-        pass
+        if self:
+            self.inorder(self.left)
+            print(self.val, end=' ')
+            self.inorder(self.right)
 
 
     def postorder(self):
-        pass
+        if self:
+            self.postorder(self.left)
+            self.postorder(self.right)
+            print(self.val, end=' ')
 
 
     def preorder(self):
-        pass
+        if self:
+            print(self.val, end=' ')
+            self.preorder(self.left)
+            self.preorder(self.right)
 
 
     def pretty_print(self):
@@ -56,7 +65,6 @@ class Node:
         
         for line in lines:
             tree_str.append(line)
-
 
         return tree_str
 
