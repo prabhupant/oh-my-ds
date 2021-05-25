@@ -57,8 +57,13 @@ class TreeProperties:
 
 
     def __repr__(self):
-        return self.__dict__
+        return json.dumps(self.__dict__, indent=4)
 
 
     def __str__(self):
-        return json.dumps(self.__repr__(), indent=4)
+        return self.__repr__()
+
+
+    def get_properties(self):
+        return self.__dict__
+

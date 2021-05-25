@@ -1,4 +1,4 @@
-from tree_properties import TreeProperties
+from .tree_properties import TreeProperties
 
 class Node:
 
@@ -118,7 +118,14 @@ class Node:
 
 
     @property
+    def tree_properties(self):
+        props = TreeProperties().get_properties()
+        return props
+       
+
+    @property
     def height(self):
+        pass
 
    
     @property
