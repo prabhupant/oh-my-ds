@@ -1,3 +1,5 @@
+from tree_properties import TreeProperties
+
 class Node:
 
     def __init__(self, val):
@@ -111,7 +113,27 @@ class Node:
             right += [m * ' '] * (p - q)
         zipped_lines = zip(left, right)
         lines = [first_line, second_line] + [a + u * ' ' + b for a, b in zipped_lines]
+
         return lines, n + m + u, max(p, q) + 2, n + u // 2
+
+
+    @property
+    def height(self):
+
+   
+    @property
+    def leaves(self):
+        pass
+
+
+    @property
+    def count_leaves(self):
+        pass
+
+
+    @property
+    def levels(self):
+        pass
 
 
 def create_tree(vals):
@@ -131,3 +153,5 @@ def create_tree(vals):
                     parent.right = node
 
     return nodes[0]
+
+
